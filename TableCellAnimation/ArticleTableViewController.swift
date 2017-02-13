@@ -50,6 +50,17 @@ class ArticleTableViewController: UITableViewController {
 
         return cell
     }
-    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        cell.alpha = 0 //Transparencia
+//        
+//        //Definimos la animación
+//        UIView.animate(withDuration: 1.0, animations: {cell.alpha = 1}) //Problema, cuando se anima se bloquea la interfaz. Para solucionrlo podriamos hacer uso de grandcentralldispatch
+        
+        let rotacionEnRadianes = 90.0 * CGFloat(M_PI/180.0)
+        let transformarRotacion = CATransform3DMakeRotation(rotacionEnRadianes, -500, 100, 0)
+        cell.layer.transform = transformarRotacion //Estado inicial
+        
+        UIView.animate(withDuration: 1.0, animations: {cell.layer.transform = CATransform3DIdentity /*Estado por defecto*/})
+    }
 
 }
